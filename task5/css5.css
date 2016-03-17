@@ -1,0 +1,155 @@
+body {
+	margin: 0;
+	padding: 0;  
+	font-family: "Microsoft Yahei";
+	background-color: #C5C1AA
+}
+header {
+	background-color: #2B2B2B; 
+	
+	overflow: hidden;	
+}
+header  img {
+    float: left; 
+    margin:10px 20px 5px 20px;
+    width: 150px;
+}
+nav ul {
+	float: right; 
+	list-style-type: disc;	
+}
+nav ul li {
+	float: left;
+    margin: 10px 15px 10px;
+}
+nav ul li a {
+	color: white;
+	text-decoration: none;
+	font-size: 12px;	
+}
+nav ul li a:hover {
+	color: #8B0000;
+}
+section, aside {
+	background-color: white;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 3px 3px 3px #999;  
+}
+section h2{
+	margin-left: 5px;
+}
+section h3 {
+	font-size: 16px;
+	color: #8B8878;
+	margin-left: 5px;
+}
+section article span {
+	font-size: 12px;
+	color: #8B8878;
+	margin-left: 5px;
+}
+section article p {
+	text-indent: 2em;
+	font-size: 14px;
+}
+section ul{
+	list-style-type: none;
+	font-size: 12px;
+}
+dl {
+	overflow: hidden;
+}
+section  dl dd {
+	border:solid 1px #ccc;
+	width: 200px;
+    margin: 20px; 
+    float: left;
+}
+section  dl dd img{
+	width: 160px;
+	margin: 0px 20px 20px;
+}
+section  dl dd p {
+	
+	text-align:center;
+	text-indent: 0
+}	
+section article table tr:first-child{
+    background-color: #262626;
+    text-align: left;
+    color: white;  
+}
+section article table{
+	border-collapse:collapse;
+	border: 1px solid #ccc;
+	width: 100%;
+}
+th ,td{
+	border: 1px solid #ccc;
+	font-size: 14px;
+}
+section article table tr:last-child {
+	background-color: #ccc
+}
+aside h3 {
+	border-left: 5px solid #ccc;
+	padding: 10px;
+}
+.input label, .select span, .describe label{
+	display: inline-block;
+	width: 30%;
+	font-size: 14px;
+	text-align: right;
+}
+.input input, .select input, .select label,textarea {
+	
+	display: inline-block;
+	font-size: 14px;
+
+}
+aside p {
+    font-size: 14px;
+    margin-left: 30%;
+    padding-left: 5px;
+    color: #ccc;
+}
+aside div{
+	margin-bottom: 10px;
+}
+textarea{
+	vertical-align: top;
+	width: 50%;
+	height: 50px;
+}
+input[type="submit"] {
+	width: 100%;
+	background-color:#1C86EE;
+	border-radius: 7px;
+	height:40px;
+	color: white;
+}
+footer {
+	width:100%;
+	height: 40px;
+	color:white; 
+	background-color: black;
+	text-align:center;
+	padding-top: 15px;
+}
+aside {
+	width: 300px;
+	float: left;
+	margin-left: -360px;
+}
+.main {
+    float: left;
+   
+}
+.main-1 {
+	float: left;
+	margin-right: 360px;
+}
+footer {
+	clear: both;
+}
