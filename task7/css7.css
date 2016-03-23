@@ -1,0 +1,601 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+/*头部样式*/
+header {
+	overflow: hidden;
+	width: 1180px;
+	padding: 10px 50px;
+	margin: 0 auto;
+	height: 37px;
+}
+.logo {
+	float: left;
+}
+header h1 {
+	float: left;
+	font-size: 21px;
+    font-family: "SimHei";
+    color: rgb(57, 58, 58);
+    margin: 6px 0 0 7px;
+}
+.log-in , .log-in-pic{
+	float: right;	
+}
+.log-in {
+	padding: 10px 2px 0 5px;
+	font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: rgb(231, 79, 77);
+}
+.log-in-pic {
+	padding: 10px 0 0 20px; 
+}
+nav  ul {
+	float: right;
+}
+nav ul li  {
+    display: inline-block;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: rgb(231, 79, 77);
+    padding: 10px 20px;
+}
+header  a {
+	text-decoration: none;
+	display: block;
+}
+nav ul li a:hover, .index {
+    border-bottom: 3px solid #e74f4d;
+    color:#e74f4d;
+    padding-bottom: 15px;
+    width: 56px;
+}
+.index {
+	text-align: center;
+    margin-right: -10px;
+}
+/*第一个区域的样式*/
+.content-1{
+	width:100%;
+	min-width: 1280px;
+	height: 690px;
+	background-image:url(images/pic1.png);
+	background-size: cover;
+	position: relative;
+}
+.content-1 h2 {
+	font-size: 60px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    position: absolute;
+    left: 100px;
+    top: 170px;
+    font-weight: normal;
+}
+.content-1 p {
+	font-size: 21px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 253, 253);
+    position: absolute;
+    left: 105px;
+    top: 260px;
+}
+.content-1 a {
+	font-size: 30px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    position: absolute;
+    left: 105px;
+    top: 380px;
+    display: block;
+    background-color: #e7504d;
+    width: 330px;
+    height: 50px;
+    text-align: center;
+    padding-top: 10px;
+}
+.content-2 {
+	
+	height: 226px;
+	width: 1280px;
+	margin: 0 auto;
+
+}
+.content-2 div {
+	float: left;
+	width: 318px;
+	padding: 50px 0px;
+	text-align: center;
+   
+
+}
+.content-2 img {
+	margin-bottom: 35px;
+}
+.content-2 p { 
+	font-size: 14px;
+    font-family: "SimHei";
+    color: rgb(118, 119, 119);
+    line-height: 1.286;
+    padding: 0 70px;
+}
+ .content-2 .two p, .content-2 .three p, .content-2 .four p{
+	border-left: 2px solid rgb(118, 119, 119);
+}
+.content-3 {
+	width: 100%;
+	min-width: 1280px;
+	text-align:center;
+	background-color: #ededed;
+	height:270px;
+	padding-top: 90px;
+}
+.content-3 p{
+	font-size: 53.586px;
+    font-family: "SimHei";
+    color: rgba(50, 51, 51, 0.502);
+	padding-top: 35px;
+}
+.content-4 {
+	width: 100%;
+	height: 340px;
+	min-width: 1280px;
+	text-align:center;
+	background-image: url(images/pic2.png);
+	background-size: cover;
+}
+
+.content-4 div p:first-child {
+	font-size: 21px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    padding: 50px 0px 10px 0px; 
+}
+.content-4 span {
+	display: inline-block;
+	width: 30px;
+	height: 20px;
+	border-top:3px solid rgba(255, 255, 255, 0.8);
+}
+.shade p:nth-child(3) {
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255 );
+
+}
+.shade {
+	height: 340px;
+	background-color: rgba(170, 53, 51, 0.2);
+}
+.content-4 form  {
+     width: 1130px;
+     margin: 0 auto;
+     position: relative;
+     top: 50px;
+}
+
+.option {
+	position: relative;
+	width: 235px;
+	float: left;
+	margin: 0 20px;
+	
+
+}
+form div input {
+	width: 235px;
+	height: 35px;
+	
+    border: none;
+}
+form div img {
+	position: absolute;
+	right: 10px;
+	top:8px;
+}
+form div:hover .view {
+    display: block;
+}
+.view {
+	display: none;
+	list-style-type: none;
+}
+.view li {
+	width: 205px;
+	height: 19px;
+	background-color:#e3e2e4; 
+	font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: rgba(50, 51, 51, 0.702);
+    text-align: left;
+    padding: 7px  0 0 30px  ;
+}
+.view li:hover { 
+	background: url(images/check.png) no-repeat;
+	background-color:#be4e48;
+}
+.option:hover {
+	outline: 1px solid #be4e48;
+}
+input[type="submit"] {
+	width: 207px;
+	height:35px;
+	font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background-color:  #be4e48;
+    border: none;
+    letter-spacing: 30px;
+    padding-left: 28px;
+}
+
+
+.content-5 {
+	min-width: 1024px;
+	padding: 105px 128px;
+	overflow: hidden;
+	
+	background-color: #f7f7f7;
+}
+.content-5 .center{
+	width: 1024px;
+
+	
+}
+.content-5 div {
+	width: 216px;
+	height:400px;
+	float: left;
+	margin: 0 20px;
+	text-align: center;
+}
+.p-last {
+    font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: rgba(50, 51, 51, 0.702);
+    padding-bottom: 10px;
+}
+.p-first {
+	font-size: 15px;
+    font-family: "Microsoft YaHei";
+    color:  rgba(0, 0, 0, 0.8);
+    padding: 15px 0 5px 0;
+}
+.content-5 img {
+	display: block;
+	padding: 10px 6px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+.content-5 .one img {
+	padding-left: 8px;
+	padding-right: 3px;
+}
+.content-5 .three img {
+	padding-left: 3px;
+	padding-right: 8px;
+}
+.content-5 .p-big{
+	font-size: 20px;
+	font-family: "Microsoft YaHei";
+	padding: 0 0 3px 25px;
+	letter-spacing: 25px;
+    color:  rgba(0, 0, 0, 0.8);
+}
+.content-6{
+	margin: 0 auto;
+	width: 1280px;
+	overflow: hidden;
+}
+.content-6 .left{
+	background-image: url(images/pic7.png);
+	width: 850px;
+	height: 567px;
+	text-align: center;
+	float: left;
+}
+.content-6 .left h2{
+	font-size: 49.473px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    padding-top: 130px;
+}
+.content-6 .left h3 {
+	font-size: 157.788px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    margin-top: -40px;
+}
+.content-6 .left p {
+	font-size: 22px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+}
+.content-6 .right {
+	width: 430px;
+	height: 567px;
+	float: right;
+	text-align: center;
+}
+.content-6 .right h2{
+	font-size: 22px;
+    font-family: "Microsoft YaHei";
+    color: rgba(0, 0, 0,0.8);
+    padding: 120px 0 30px 0;
+    
+}
+.content-6 .right h2 span {
+	color: #e74f4d;
+}
+.content-6 .right p {
+	font-size: 12px;
+    font-family: "SimSun";
+    color: rgb(170, 170, 170);
+    line-height: 2.5;
+    width: 280px;
+    text-align: left;
+    margin: 0 auto;
+}
+.button {
+	font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: rgb(226, 92, 96);
+    width: 105px;
+    height: 26px;
+    border: 1px solid rgb(226, 92, 96);
+    margin: 50px auto 20px;
+    text-align: center;
+    padding-top: 9px;
+}
+.content-6 .right ul li {
+	width: 10px;
+	height: 10px;
+	border: 1px solid #929293;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 0 5px;
+}
+.content-6 .right ul li:hover,.in {
+	background-color: #929293;
+}
+.content-6 .left img {
+	position: relative;
+	top: -285px;
+	right: -415px;
+}
+.content-7 {
+	width: 1280px;
+	height: 521px;
+	overflow: hidden;
+    margin: 0 auto;
+}
+.content-7 div {
+	width: 426px;
+	height: 340px;
+	float: left;
+	text-align: center;
+	padding: 180px 0 0 0;
+}
+.content-7 .one{
+	background-color: #e74f4d;
+}
+.content-7 div p{
+	font-size: 21px;
+    font-family: "SimHei";
+    color: rgb(255, 255, 255);
+    line-height: 1.446;
+    margin: 4px 0;
+}
+.content-7 div span {
+	width: 30px;
+	height: 3px;
+	display: block;
+	background-color: #fff;
+	margin: 15px auto;
+}
+.content-7 div a {
+	display: block;
+	margin: 20px auto;
+	text-decoration: none;
+	border: 1px solid #fff;
+	padding: 9px 30px 7px;
+	width: 110px;
+	height: 25px;
+	font-size: 21px;
+    font-family: "SimHei";
+    color: rgb(255, 255, 255);
+}
+.content-7 .two p ,.content-7 .two a ,.content-7 .two span{
+    color: #000;
+    opacity: 0.8;
+}
+.content-7 .two a{
+	border: 1px solid #e74f4d;
+	color:#e74f4d; 
+}
+.content-7 .three {
+	padding: 0;
+	position: relative;
+}
+.content-7 .three img:first-child{
+	top: 250px;
+	position:absolute;
+}
+.content-8 {
+	min-width:1280px;
+	text-align: center;
+	overflow: hidden;
+	margin: 100px 0;
+}
+.content-8 .top h2 {
+	font-size: 21px;
+    font-family: "SimHei";
+    color: rgb(50, 51, 51);
+}
+.content-8 .top span {
+	width: 20px;
+	height: 3px;
+	background-color: #ea6563;
+	display: block;
+	margin: 5px auto 10px;
+}
+.content-8 .top p {
+	font-size: 12px;
+    font-family: "Microsoft YaHei";
+    color: rgb(170, 170, 170);
+    line-height: 1.5;
+    margin-bottom: 100px;
+}
+.content-8 .left {
+	width: 300px;
+	text-align: left;
+	margin: 0 50px;
+    float: left;
+}
+.content-8 .left h3 {
+	font-size: 14px;
+    font-family: "SimHei";
+    color: rgba(35, 24, 21, 0.8);
+    margin-bottom: 20px;
+    clear: both;
+}
+.content-8 .left p {
+	font-size: 12px;
+    font-family: "SimSun";
+    color: rgba(35, 24, 21, 0.6);
+    line-height: 1.75;
+}
+.content-8 .left img {
+    float: right;
+    margin-bottom: 20px;
+}
+.content-8 form {
+	width: 800px;
+	float: right;
+	position: relative;
+	top:0;
+}
+.content-8 form label {
+	float: left;
+	width: 335px;
+	height: 40px;
+	background-color: #ededee;
+	overflow: hidden;
+	margin: 10px 10px;
+	
+}
+.content-8 form input {
+	width: 250px;
+	height: 40px;
+	border: none;
+	background-color: transparent;
+	outline: 0;
+	
+	float: left;
+	display: block;
+}
+.content-8 form label span {
+	float: left;
+	display: block;
+    margin: 12px 0 0 15px;
+    font-size: 12px;
+    font-family: "SimHei";
+    color: rgb(50, 51, 51);
+}
+
+.content-8 form label[for="describe"] {
+   width: 690px;
+   height: 80px;
+}
+.content-8 textarea {
+	height: 60px;
+	width: 525px;
+	float: left;
+	margin-top: 12px;
+    border: none;
+	background-color: transparent;
+	outline: 0;
+}
+.content-8 input[type="submit"] {
+    width: 690px;
+    height: 40px;
+    border: none;
+	background-color: #ededee;
+	outline: 0;
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 14px;
+    font-family: "SimHei";
+    color: rgb(50, 51, 51);
+    letter-spacing: 3px;
+}
+footer {
+	min-width: 1280px;
+	text-align: center;
+	background-color: #32363e;
+	font-family: "SimHei";
+    color: rgb(255, 255, 255);
+}
+footer .centre {
+	padding: 80px 0 80px 0;
+}
+footer .centre p:first-child {
+	font-size: 21px;
+}
+footer .centre p:nth-child(2) {
+	font-size: 12px;
+	width: 400px;
+	margin: 5px auto 20px;
+}
+footer .centre form {
+	width: 510px;
+	height: 40px;
+	margin: 30px auto 40px;
+}
+footer .centre  img {
+    padding: 0 8px;
+}
+footer .centre form input[type="email"] {
+	width: 420px;
+	height:40px;
+	padding-left: 10px;
+	outline: 0;
+	border: none;
+}
+footer .centre form input[type="snbmit"] {
+	width: 80px;
+	height: 40px;
+	border: none;
+	outline: 0;
+	background-color: #6f7278;
+	font-size: 15px;
+    font-family: "Microsoft YaHei";
+    color: rgb(255, 255, 255);
+    text-align: center;
+    float: right;
+}
+footer .last {
+	position: relative;
+	height: 55px;
+	background-color: #303039;
+}
+footer .last p {
+	font-size: 12px;
+    font-family: "SimSun";
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 25px;
+}
+footer .last p:first-child {
+    
+    left: 50px;
+}
+footer .last p:last-child {
+    right: 50px;
+}
