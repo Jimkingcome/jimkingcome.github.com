@@ -1,0 +1,402 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>听指令的小方块（三）</title>
+    <style>
+    td {
+       width: 40px;
+       height: 40px;
+       border:2px solid #ccc;
+       text-align: center;
+       position: relative;
+       padding: 0;
+   }
+   .content {
+    position: relative;
+}
+table {
+   margin: 0 auto;
+
+   border-collapse:collapse; 
+}
+
+tr:first-child>td, tr>td:first-child {
+    border:none;
+    width: 40px;
+    height: 40px;
+}
+.color {
+  background-color: red;
+}
+.direction {
+    position: absolute;
+    top:0px;
+    width: 100%;
+    height: 10px;
+    background-color: blue;
+}
+
+.inputarea {
+    margin: 20px auto;
+    width: 300px;
+    position: relative;
+}
+.container {
+  width: 461px;
+  height: 461px;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  margin-left: -231px; 
+}
+.moveDiamond {
+  transition:all 1s;
+  -moz-transition: all 1s;    /* Firefox 4 */
+  -webkit-transition: all 1s;   /* Safari 和 Chrome */
+  -o-transition: all 1s;    /* Opera */
+  position:relative;
+  width:40px;
+  height:40px;
+  background-color:red;
+}
+textarea {
+  width:200px;
+  height: 100px;
+  background-color: black;
+  color: green; 
+  border:none;
+  line-height: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0;
+}
+.viewNember {
+  width: 15px;
+  height: 100px;
+  background-color: #4cc;
+  color: #fff;
+  float: left;
+  padding: 0px 5px 0px;
+  text-align:center;
+  overflow: hidden;
+}
+.number {
+    width: 15px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 20px;
+    text-align:center;
+    padding: 0;
+}
+</style>
+</head>
+
+<body>
+  <div class="content">
+    <table>
+      <tbody>
+        <tr>
+          <td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+          <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+      </tr>
+      <tr>
+          <td>1</td><td></td><td></td><td></div></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>2</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>3</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>4</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>5</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>6</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>7</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>8</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>9</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>10</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+  </tbody>   
+</table>
+<div class="container">
+    <div class="moveDiamond">
+      <div class='direction'></div>
+  </div>
+</div>
+</div>
+
+
+<div class="inputarea">
+    <div class="viewNember"></div>
+    <textarea></textarea>
+    <input type="button" value="执行">
+</div>
+<script>
+
+function Data(index1,index2) {
+    var focus = true,
+    direction = 0,
+    rowNumber = index1,
+    colNumber = index2;
+    return {
+        changeFocus: function() {
+            if (focus) {
+                focus = false;
+            } else {
+                focus = true;
+            }
+        },
+        getFocus: function() {
+            return focus;
+        },
+        getRowNumber: function() {
+            return rowNumber;
+        },
+        getColNumber: function() {
+            return colNumber;
+        },
+        getDirection: function() {
+            return direction;
+        },
+        changeDirection: function(order) {
+            switch (order) {
+                case "TUN LEF":
+                direction = direction += 90;
+                if (direction == 360) {
+                    direction = 0;
+                };
+                break;
+                case "TUN RIG":
+                direction = direction -= 90;
+                if (direction < 0) {
+                    direction = 270;
+                };
+                break;
+                case "TUN BAC":
+                direction = direction += 180;
+                if (direction == 360) {
+                    direction = 0;
+                };
+                if (direction == 450) {
+                    direction = 90;
+                }
+                break;
+                case "MOV LEF":
+                direction = 0;
+                break;
+                case "MOV TOP":
+                direction = 90;
+                break;
+                case "MOV RIG":
+                direction = 180;
+                break;
+                case "MOV BOT":
+                direction = 270;
+                break;
+            }
+            
+        },
+        changeLocation: function(order) {
+            if (order&&order!=null) {
+               switch (order) {
+                case "TRA LEF":
+                if (colNumber == 10) {
+                    return;
+                };
+                colNumber = colNumber += 1;
+                break;
+                case "TRA TOP":
+                if (rowNumber == 1) {
+                    return;
+                };
+                rowNumber = rowNumber -= 1;
+                break;
+                case "TRA RIG":
+                if (colNumber == 1) {
+                    return;
+                };
+                colNumber = colNumber -= 1;
+                break;
+                case "TRA BOT":
+                if (rowNumber == 10) {
+                    return;
+                };
+                rowNumber = rowNumber += 1;
+                break;
+            }
+        } else {
+
+            switch (direction) {
+                case 0:
+                if (colNumber == 10) {
+                    return;
+                };
+                colNumber = colNumber += 1;
+                break;
+                case 90:
+                if (rowNumber == 1) {
+                    return;
+                };
+                rowNumber = rowNumber -= 1;
+                break;
+                case 180:
+                if (colNumber == 1) {
+                    return;
+                };
+                colNumber = colNumber -= 1;
+                break;
+                case 270:
+                if (rowNumber == 10) {
+                    return;
+                };
+                rowNumber = rowNumber += 1;
+                break;
+            }
+        }
+    }
+}
+}
+
+
+
+
+var moveDiamond = document.getElementsByClassName('moveDiamond')[0];
+
+var diamond = Data(4,6);
+if (diamond.getFocus()) {
+    render(diamond.getRowNumber(),diamond.getColNumber(),diamond.getDirection(),true);
+}
+
+
+function render(index1,index2,direction,nowOrForm) {
+
+    if (nowOrForm) {
+        switch(direction) {
+            case 0:
+            moveDiamond.style.transform = "rotate(90deg)";
+            break;
+            case 90:
+            moveDiamond.style.transform = "rotate(0deg)";
+            break;
+            case 180:
+            moveDiamond.style.transform = "rotate(270deg)";
+            break;
+            case 270:
+            moveDiamond.style.transform = "rotate(180deg)";
+            break;
+        }
+
+        moveDiamond.style.margin = index1*42 + 'px 0 0 ' + (index2*42+1) + 'px';
+
+    }
+}
+
+
+
+function command(order,count,index){
+    if (order=="GO") {
+        for (var i = 0; i < count; i++) {
+          diamond.changeLocation();
+        }
+        
+    } else if(order.slice(0,3)=="TRA") {
+        for (var i = 0; i < count; i++) {
+          diamond.changeLocation(order);
+        }
+    } else if(order.slice(0,3)=="MOV") {
+      for (var i = 0; i < count; i++) {
+          diamond.changeDirection(order);
+          diamond.changeLocation();
+      }
+    } else if(order.slice(0,3)=="TUN") {
+      for (var i = 0; i < count; i++) {
+        diamond.changeDirection(order);
+      }
+    } else {
+      var err = document.getElementsByClassName('number')[index];
+      err.style.color = "red";
+    }
+    render(diamond.getRowNumber(),diamond.getColNumber(),diamond.getDirection(),true);
+}
+
+function check(item,index) {
+    var itemArr = item.split(" ");
+    var count = itemArr[itemArr.length - 1];
+    if (!isNaN(count)) {
+      itemArr.pop();
+      var currentItem = itemArr.join(" ");
+      command(currentItem,count,index);
+    } else {
+      var currentItem = itemArr.join(" ");
+      command(currentItem,1,index);
+    }
+}
+
+var bottom = document.getElementsByTagName('input')[0];
+
+bottom.onclick = function() {
+    var value = input.value.trim().toUpperCase();
+    arr = value.split("\n");
+    if (arr.length == 0) {
+      return;
+    }
+    var i = 0;
+    var timer = setInterval(function(){
+        if (i<arr.length) {
+          check(arr[i],i);
+          i++;
+        } else {
+          clearInterval(timer);
+        }
+    },1000);
+    
+}
+var arr = [];
+var input = document.getElementsByTagName('textarea')[0];
+var veiwNumber = document.getElementsByClassName("viewNember")[0];
+input.addEventListener("keyup",addvalue,false);
+input.addEventListener('scroll', function() {
+    var top = input.scrollTop;
+    veiwNumber.scrollTop = top;
+  })
+function addvalue(event) {
+  
+      var value = input.value.trim().toUpperCase();
+      arr = value.split("\n");
+      
+      veiwNumber.innerHTML = "";
+      for (var i = 0; i < arr.length; i++) {
+        veiwNumber.innerHTML += "<div class='number'>" + (i+1) + "</div>";
+      }
+      var top = input.scrollTop;
+      veiwNumber.scrollTop = top;
+  
+}
+
+</script>
+</body>
+</html>

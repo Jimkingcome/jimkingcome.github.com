@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>操作数组数据</title>
+	<style>
+	form {
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+	span {
+		display: block;
+		margin: 0px 3px;
+		padding: 10px;
+		background-color: red;
+		color: #fff;
+		float: left;
+	}
+	</style>
+	<script>
+	window.onload = function(){
+//事件绑定函数，兼容浏览器差异
+function addEvent(element, event, listener) {
+	if (element.addEventListener) {
+		element.addEventListener(event, listener, false);
+	}
+	else if (element.attachEvent) {
+		element.attachEvent("on" + event, listener);
+	}
+	else {
+		element["on" + event] = listener;
+	}
+}
+
+function reg(str) {
+	return /^\d+$/.test(str);
+}
+var doc = document,
+arrText = doc.getElementById('arrText'),
+unshift_= doc.getElementById('unshift_'),
+push_= doc.getElementById('push_'),
+shift_= doc.getElementById('shift_'),
+pop_= doc.getElementById('pop_'),
+arr = [];
+		//渲染数组
+		function renderArr() {
+			arrText.innerHTML = "";
+			var str = "",
+			i,len;
+			for ( i = 0, len = arr.length; i < len; i++) {
+				str += "<span>"+arr[i]+"</span>";
+			};
+			arrText.innerHTML = str;
+		}
+		
+		//事件代理
+		var arrText = document.getElementById('arrText'),
+		    spans = arrText.getElementsByTagName('span');
+		addEvent(arrText,"click",function(e) {
+			if (e.target && e.target.nodeName.toUpperCase() == "SPAN") {
+		    		//[].slice.call可以将NodeList转换成数组
+		    		var index = [].slice.call(spans,0).indexOf(e.target);
+		    		arr.splice(index,1);
+		    		renderArr();
+		    	}
+		    }); 
+        
+		//添加事件
+		addEvent(unshift_,"click",function(event) {
+			var input = document.getElementById('input').value;
+			if (reg(input)) {
+				arr.unshift(input);
+				renderArr();	
+			} else {
+				alert("请输入数字");
+			}
+			event.preventDefault();
+		}); 
+		addEvent(push_,"click",function(event) {
+			var input = document.getElementById('input').value;
+			if (reg(input)) {
+				arr.push(input);
+			    renderArr();
+			} else{
+                alert("请输入数字");
+			}
+			event.preventDefault();
+		});
+		addEvent(shift_,"click",function(event) {
+			if (arr.length) {
+				var del = arr.shift();
+			    renderArr();
+                alert(del);
+			} else{
+				alert("数组为空");
+			}
+			event.preventDefault();
+		}); 
+		addEvent(pop_, "click", function(event) {
+			if (arr.length) {
+				var del = arr.pop();
+			    renderArr();
+			    alert(del);
+			} else{
+				alert("数组为空");
+			}
+			event.preventDefault();
+		});
+};
+		</script>
+	</head>
+
+	<body>
+		<form>	
+			<input type="text" id="input">
+			<button id="unshift_">左侧入</button>
+			<button id="push_">右侧入</button>
+			<button id="shift_">左侧出</button>
+			<button id="pop_">右侧出</button>
+		</form>
+		<div id="arrText">
+			
+		</div>
+	</body>
+	</html>

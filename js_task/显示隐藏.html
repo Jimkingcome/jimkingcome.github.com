@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:100Px; height:200px; background:#CCC; display:none;}
+</style>
+<script>
+function showhide(){
+   var o=document.getElementById('div1');
+   if (o.style.display=='block')
+   {o.style.display='none';
+   }
+   else
+   {o.style.display='block';
+   }
+}
+</script>
+
+</head>
+
+<body>
+<input type="button" value='隐藏显示' onClick="showhide()"/>
+<div id=div1>
+</div>
+</body>
+</html>

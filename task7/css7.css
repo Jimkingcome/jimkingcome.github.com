@@ -236,20 +236,22 @@ input[type="submit"] {
 
 
 .content-5 {
-	min-width: 1024px;
-	padding: 105px 128px;
-	overflow: hidden;
-	
+	height: 610px;
 	background-color: #f7f7f7;
+}
+.wapper {
+    overflow: hidden;
+	width: 1280px;
+	margin: 0 auto;
 }
 .content-5 .center{
 	width: 1024px;
+    padding: 105px 128px;
 
-	
 }
-.content-5 div {
+.content-5 .box {
 	width: 216px;
-	height:400px;
+	height: 400px;
 	float: left;
 	margin: 0 20px;
 	text-align: center;

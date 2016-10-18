@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JavaScript和树（一）</title>
+	<style>
+	div {
+		background-color: #fff;
+	}
+	.root {
+		display: flex;
+		padding: 20px;
+		width: 1000px;
+		height: 300px;
+		border: 1px solid #000;
+		margin: 100px auto;
+		margin-bottom: 10px;
+		justify-content: space-between;
+	}
+	.child1 {
+		display: flex;
+		padding: 20px;
+		width: 450px;
+		height: 260px;
+		border: 1px solid red;
+		justify-content: space-between;
+	}
+	.child2 {
+		display: flex;
+		padding: 20px;
+		width: 170px;
+		height: 220px;
+		border: 1px solid green;
+		justify-content: space-between;
+	}
+	.child3 {
+		display: flex;
+		padding: 20px;
+		width: 35px;
+		height: 180px;
+		border: 1px solid blue;
+		justify-content: space-between;
+	}
+	input {
+		margin-left: 100px;
+		width: 100px;
+		height: 50px;
+		font-size: 30px;
+	}
+	</style>
+
+</head>
+
+<body>
+	<div class="root">
+		<div class="child1">
+			<div class="child2">
+				<div class="child3"></div>
+				<div class="child3"></div>
+			</div>
+			<div class="child2">
+				<div class="child3"></div>
+				<div class="child3"></div>
+			</div>
+		</div>
+		<div class="child1">
+			<div class="child2">
+				<div class="child3"></div>
+				<div class="child3"></div>
+			</div>
+			<div class="child2">
+				<div class="child3"></div>
+				<div class="child3"></div>
+			</div>
+		</div>
+	</div>	
+	<input type="button" value="前序">
+	<input type="button" value="中序">
+	<input type="button" value="后序">
+	<script>
+	var btn = document.getElementsByTagName('input'),
+	    preBtn = btn[0],
+	    midBtn = btn[1],
+	    latBtn = btn[2],
+	    treeRoot = document.getElementsByClassName('root')[0],
+	    divList = [];
+	    
+
+    	//添加事件
+    	preBtn.onclick = function () {
+    		divList = [];
+            preOrder(treeRoot);
+            changeColor();
+    	}
+        midBtn.onclick = function () {
+    		divList = [];
+            midOrder(treeRoot);
+            changeColor();
+    	}
+    	latBtn.onclick = function () {
+    		divList = [];
+            latOrder(treeRoot);
+            changeColor();
+    	}
+    	//前序遍历
+    	function preOrder(node) {
+    		if (node !== null) {
+    			divList.push(node);
+    		    preOrder(node.firstElementChild);
+    		    preOrder(node.lastElementChild);
+    		}
+    		
+    	}
+    	//中序遍历
+    	function midOrder(node) {
+    		if (node !== null) {
+    		    midOrder(node.firstElementChild);
+    		    divList.push(node);
+    		    midOrder(node.lastElementChild);
+    		}
+    		
+    	}
+    	//后序遍历
+    	function latOrder(node) {
+    		if (node !== null) {
+    		    latOrder(node.firstElementChild);
+    		    latOrder(node.lastElementChild);
+    		    divList.push(node);
+    		}
+    		
+    	}
+        //颜色变化
+        function changeColor() {
+        	var i = 0;
+        	var step = function() {
+        		if (i < divList.length) {
+        			divList[i].style.backgroundColor = "blue";
+        			if (i-1 >= 0) {
+        				divList[i-1].style.backgroundColor = "#fff";
+        			}
+        			i++;
+        			setTimeout(step,500);
+        		}
+        		divList[divList.length-1].style.backgroundColor = "#fff"; 
+        	}
+        	setTimeout(step,500);
+        }
+    
+	</script>
+</body>
+</html>

@@ -137,10 +137,11 @@ footer {
 	text-align:center;
 	padding-top: 15px;
 }
-aside {
-	width: 300px;
+aside { 
+	text-align:center;
+	width: 400px;
 	float: left;
-	margin-left: -360px;
+	margin-left: -460px;
 }
 .main {
     float: left;
@@ -148,7 +149,7 @@ aside {
 }
 .main-1 {
 	float: left;
-	margin-right: 360px;
+	margin-right: 460px;
 }
 footer {
 	clear: both;

@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tag标签输入去重</title>
+	<style>
+	textarea {
+		display: block;
+	}
+	*{
+		margin: 10px 2px 0px;
+	}
+	#tagText, #hobbyText{
+		min-height: 20px;
+		overflow: hidden;
+		margin: 10px;
+	}
+	#tagText span, #hobbyText span {
+		display: inline-block;
+		line-height: 24px;
+		background-color: blue;
+		color: #fff;
+        margin-left: 5px;
+	}
+	#tagText span:hover, #hobbyText span:hover {
+		background-color: red;
+	}
+	</style>
+	
+</head>
+
+<body>	
+	<label>Tag:<input type="text" id="tagInput"></label>
+	<div id="tagText">
+	</div>
+	<textarea rows="5" cols="26" placeholder="爱好" id="hobbyInput"></textarea>
+	<input type="button" id="button" value="确认兴趣爱好">
+	<div id="hobbyText">
+	</div>
+	<script>
+	window.onload = function(){
+        //事件绑定函数，兼容浏览器差异
+        function addEvent(element, event, listener) {
+    	    if (element.addEventListener) {
+    		    element.addEventListener(event, listener, false);
+    	    }
+    	    else if (element.attachEvent) {
+    		    element.attachEvent("on" + event, listener);
+    	    }
+    	    else {
+    		    element["on" + event] = listener;
+    	    }
+        }
+        //构造函数
+    
+    	function Tag(input,output) {
+    		//计数器，数组
+    		this.arr = [];
+    		
+    		this.input1 = document.getElementById(input);
+    		this.output1 = document.getElementById(output);
+    		this.getData = function() {
+    			switch (input) {
+    				case "tagInput":
+                	var value = this.input1.value.match(/(^[^,\， ]*)/)[0];//匹配未包含, ，的任意字符
+                	break;
+                	case "hobbyInput":
+                	default:
+                	var value = this.input1.value.trim().split(/,|，|、|\s|\n|\r|\t/);//以这些分隔符将字符串分成数组
+                }
+                return value;
+            };
+    	}
+    	Tag.prototype = {
+    		constructor: Tag,
+    		addArrData : function(value) {
+    			if (value === '' || value === ',' || value === '，') {
+                    return false;
+                 } else{
+                 	this.arr.push(value);
+                 }
+    			
+    		},
+    		deleteArrData : function(index) {
+    			this.arr.splice(index,1)
+    		},
+    		indexArrData : function(value) {
+                var index = this.arr.indexOf(value);
+    		   	return index;
+    		},
+    	
+            render : function(value) {
+            	if (value === '' || value === ',' || value === '，') {
+                    return ;
+                 }
+            	this.output1.innerHTML = this.arr.map(function(item) {
+            		return '<span>'+item+'</span>';
+            	}).join('');
+            }
+        
+       
+         };
+
+    var tag = new Tag('tagInput','tagText');
+    var hobby = new Tag('hobbyInput','hobbyText');
+    
+	addEvent(document,"keyup",function(event) {
+		if (/(,| |\，)$/.test(tag.input1.value) || event.keyCode === 13) {
+			if (tag.indexArrData(tag.getData().trim()) >= 0){
+				tag.input1.value = "";
+				return;
+			} else {
+				tag.addArrData(tag.getData().trim())
+				
+				if (tag.arr.length > 10) {
+					tag.arr.shift(tag.arr[0]);
+				
+				}
+				tag.render();
+				tag.input1.value = "";
+			}    	
+		}
+	
+	})
+
+	
+
+    addEvent(tag.output1,"mouseover",function(event) {
+    	if (event.target && event.target.nodeName.toUpperCase() == "SPAN") {
+    		event.target.textContent = "删除： " + event.target.textContent;
+    	}
+		
+	});
+	addEvent(tag.output1,"mouseout",function(event) {
+		if (event.target && event.target.nodeName.toUpperCase() == "SPAN") {
+		event.target.textContent =  event.target.textContent.replace(/删除： /,"");
+	    }
+	});
+
+	addEvent(tag.output1,"click",function(e) {
+		if (e.target && e.target.nodeName.toUpperCase() == "SPAN") {
+			var arrText = document.getElementById("tagText");
+			var spans = arrText.getElementsByTagName('span');
+		    	var index1 = [].slice.call(spans,0).indexOf(e.target);//[].slice.call可以将NodeList转换成数组
+		    		tag.deleteArrData(index1);
+		    	
+		    		tag.render();
+		    		}
+		    	});
+
+	addEvent(document.getElementById('button'),"click",function(event) {
+		var i,items;
+		items = hobby.getData();
+		for (i = 0;  i < items.length; i++) {
+			if (hobby.indexArrData(items[i].trim()) >= 0) {
+				hobby.input1.value = "";
+				continue;
+			} else {
+				hobby.addArrData(items[i].trim());
+				
+				if (hobby.arr.length > 10) {
+					hobby.arr.shift(hobby.arr[0]);
+		
+				}
+				hobby.render();
+		        hobby.input1.value = ""; 
+			}
+			
+		}
+		
+	})
+
+
+	addEvent(hobby.output1,"mouseover",function(event) {
+		if (event.target && event.target.nodeName.toUpperCase() == "SPAN") {
+		event.target.textContent = "删除： " + event.target.textContent;
+	    }
+	});
+	addEvent(hobby.output1,"mouseout",function(event) {
+		if (event.target && event.target.nodeName.toUpperCase() == "SPAN") {
+		event.target.textContent =  event.target.textContent.replace(/删除： /,"");
+	    }
+	});
+	addEvent(hobby.output1,"click",function(e) {
+		if (e.target && e.target.nodeName.toUpperCase() == "SPAN") {
+			var arrText = document.getElementById("hobbyText");
+			var spans = arrText.getElementsByTagName('span');
+		    	var index1 = [].slice.call(spans,0).indexOf(e.target);//[].slice.call可以将NodeList转换成数组
+		    	hobby.deleteArrData(index1);
+		    	
+		    	hobby.render();
+		}
+    });
+
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JavaScript和树（二）</title>
+	<style>
+	div {
+		background-color: #fff;
+	}
+	.root {
+		display: flex;
+		padding: 10px;
+		width: 1200px;
+		height: 300px;
+		border: 1px solid #000;
+		margin: 100px auto;
+		margin-bottom: 10px;
+		justify-content: space-between;
+	}
+	.child1 {
+		display: flex;
+		padding: 10px;
+		height: 275px;
+		border: 1px solid red;
+		justify-content: space-between;
+	}
+	.child2 {
+		display: flex;
+		padding: 10px;
+		margin: 5px;
+		height: 245px;
+		border: 1px solid green;
+		justify-content: space-between;
+	}
+	.child3 {
+		display: flex;
+		padding: 10px;
+		margin: 5px;
+		height: 215px;
+		border: 1px solid blue;
+		justify-content: space-between;
+	}
+	input {
+		margin-left: 100px;
+		width: 100px;
+		height: 50px;
+		font-size: 30px;
+	}
+	</style>
+
+</head>
+
+<body>
+	<div class="root">1
+		
+		<div class="child1">2
+			
+			<div class="child2">3
+				
+				<div class="child3">4</div>
+				<div class="child3">5</div>
+				<div class="child3">6</div>
+				<div class="child3">7</div>
+			</div>
+			<div class="child2">
+				8
+				<div class="child3">9</div>
+				<div class="child3">10</div>
+			</div>
+			<div class="child2">
+				11
+			</div>
+			<div class="child2">
+				12
+				<div class="child3">13</div>
+				<div class="child3">14</div>
+				<div class="child3">15</div>
+			</div>
+		</div>
+		<div class="child1">
+			16
+			<div class="child2">
+				17
+				<div class="child3">18</div>
+				<div class="child3">19</div>
+				<div class="child3">20</div>
+			</div>
+			<div class="child2">
+				21
+				<div class="child3">22</div>
+				<div class="child3">23</div>
+			</div>
+			<div class="child2">
+				24
+				<div class="child3">25</div>
+				<div class="child3">26</div>
+			</div>
+		</div>
+		<div class="child1">
+			27
+		</div>
+	</div>	
+	<input type="button" value="深度优先">
+	<input type="button" value="广度优先">
+	<input type="button" value="查询">
+	<input type="text">
+	<script>
+	var btn = document.getElementsByTagName('input'),
+	preBtn = btn[0],
+	latBtn = btn[1],
+	demand = btn[2],
+	input = btn[3],
+	treeRoot = document.getElementsByClassName('root')[0],
+	divList = [];
+
+
+    	//添加事件
+    	preBtn.onclick = function () {
+    		divList = [];
+    		traverseDF(pushData);
+    		changeColor();
+    	}
+
+    	latBtn.onclick = function () {
+    		divList = [];
+    		traverseBF(pushData);
+    		changeColor();
+    	}
+    	demand.onclick = function () {
+    		
+    		traverseDF(demandData);
+    	}
+    	//加入数据
+    	function pushData(node) {
+    		divList.push(node);
+    	}
+    	//查询数据
+    	function demandData(node) {
+    		var inputValue = input.value.trim();
+    		if (inputValue === node.firstChild.nodeValue.trim()) {
+    			node.style.backgroundColor = "red";
+    		} else {
+    			node.style.backgroundColor = "#fff";
+    		}
+    	}
+    	//深度优先遍历
+    	function traverseDF(callback) {
+    		(function preOrder(node) {
+    			if (node !== null) {
+    				callback(node);
+    				for (var i = 0, len = node.childNodes.length; i < len; i++) {
+    					if (node.childNodes[i].nodeType == 1){
+    						preOrder(node.childNodes[i]); 
+    					}
+    				}
+    			}  
+    		})(treeRoot);	
+    	}
+    	
+    	//广度优先遍历
+    	function traverseBF(callback) {
+    		(function lasOrder(node){
+    			if (node !== null) {
+    				var queue = [];
+    				queue.push(node);
+    				var currentNode = queue.shift();
+    				while (currentNode) {
+    					for (var i = 0, len = currentNode.childNodes.length; i < len; i++) {
+    						if (currentNode.childNodes[i].nodeType == 1){
+    							queue.push(currentNode.childNodes[i]);
+    						}
+    					}
+    					callback(currentNode);
+    					currentNode = queue.shift();
+    				}    
+    			}	
+    		})(treeRoot);	
+    	}
+        //颜色变化
+        function changeColor() {
+        	var i = 0,
+        	len = divList.length;
+        	var step = function() {
+        		if (i < len) {
+        			divList[i].style.backgroundColor = "blue";
+        			if (i-1 >= 0) {
+        				divList[i-1].style.backgroundColor = "#fff";
+        			}
+        			if (i === len - 1) {
+        				setTimeout(function() {
+        					divList[len - 1].style.backgroundColor = "#fff";
+        				},500);
+        			}
+        			i++;
+        			setTimeout(step,500);
+        			
+        		}
+
+        	}
+
+        	setTimeout(step,500);
+        }
+
+
+
+
+
+
+
+        </script>
+    </body>
+    </html>

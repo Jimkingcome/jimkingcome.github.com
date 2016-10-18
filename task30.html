@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>表单（二）多个表单项的动态校验</title>
+	<style>
+	#content {
+		margin:0;
+		padding: 0;
+		font-family: "黑体";
+		font-size: 20px;
+		width: 450px;
+		margin: 100px auto;
+	}
+	button {
+		color: #fff;
+		background-color: lightblue;
+		width: 70px;
+		height: 35px;
+		border:none;
+		border-radius: 5px;
+		font-size: 20px;
+		display: block;
+		float: right;
+		margin-right: 35px;
+	}
+	label span {
+		width: 20%;
+		display: inline-block;
+		margin: 0 10px;
+		text-align: right;
+	}
+	.reminder {
+		margin: 5px 0 5px 110px ;
+		font-size: 15px;
+		color: #ccc;
+		height: 17px;
+	}
+
+	.input {
+		width: 300px;
+		height: 35px;
+		border-radius: 5px;
+		font-size: 20px;
+	}
+	.inputNormal {
+		border:1px solid #ccc;
+	}
+	.inputWrong {
+		border:1px solid red;
+	}
+	.inputRight {
+		border:1px solid green;
+	}
+	
+	</style>
+
+</head>
+
+<body>
+	<div id="content">
+		<label><span>名称</span><input type="text" class="input inputNormal" id="name"></label>
+		<div class="reminder"></div>
+		<label><span>密码</span><input type="text" class="input inputNormal" id="possword"></label>
+		<div class="reminder"></div>
+		<label><span>密码确认</span><input type="text" class="input inputNormal" id="posswordAgain"></label>
+		<div class="reminder"></div>
+		<label><span>邮箱</span><input type="text" class="input inputNormal" id="mail"></label>
+		<div class="reminder"></div>
+		<label><span>手机</span><input type="text" class="input inputNormal" id="phone"></label>
+		<div class="reminder"></div>
+		<button id = "button">提交</button>
+	</div>
+	<script>
+	(function () {
+		var content = document.getElementById('content'),
+		reminder = document.getElementsByClassName('reminder'),
+		button = document.getElementById('button'),
+		inputs = document.getElementsByTagName('input'),
+		regPassword = /^[a-zA-Z][a-zA-Z0-9]{3,15}$/,
+		regMail = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/,
+		regPhone = /^[1][358][0-9]{9}$/;
+		
+		function nameVerify() {
+			var input = document.getElementById('name'),
+			inputValue = input.value.trim(),
+			length = getLength(inputValue);
+			if (length == 0) {
+				input.className = "input inputWrong";
+				reminder[0].innerHTML = "姓名不能为空";
+				return false;
+			} else if (length < 4 || length > 16) {
+				input.className = "input inputWrong";
+				reminder[0].innerHTML = "姓名长度应为4~16位";
+				return false;
+			} else {
+				input.className = "input inputRight";
+				reminder[0].innerHTML = "姓名格式正确";
+				return true;
+			}	
+		}
+		function posswordVerify() {
+			var input = document.getElementById('possword'),
+			inputValue = input.value.trim();
+			if (inputValue.length == 0) {
+				input.className = "input inputWrong";
+				reminder[1].innerHTML = "密码不能为空";
+				return false;
+			} else if (!regPassword.test(inputValue)) {
+				input.className = "input inputWrong";
+				reminder[1].innerHTML = "密码格式不正确";
+				return false;
+			} else {
+				input.className = "input inputRight";
+				reminder[1].innerHTML = "密码格式正确";
+				return true;
+			}	
+		}
+		function posswordAgianVerify() {
+			var input1 = document.getElementById('possword'),
+			inputValue1 = input1.value.trim();
+			var input2 = document.getElementById('posswordAgain'),
+			inputValue2 = input2.value.trim();
+			if (inputValue2.length == 0) {
+				input2.className = "input inputWrong";
+				reminder[2].innerHTML = "密码不能为空";
+				return false;
+			} else if (inputValue1 != inputValue2) {
+				input2.className = "input inputWrong";
+				reminder[2].innerHTML = "密码输入不一致";
+				return false;
+			} else {
+				input2.className = "input inputRight";
+				reminder[2].innerHTML = "密码输入一致";
+				return true;
+			}	
+		}
+		function mailVerify() {
+			var input = document.getElementById('mail'),
+			inputValue = input.value.trim();
+			if (inputValue.length == 0) {
+				input.className = "input inputWrong";
+				reminder[3].innerHTML = "邮箱不能为空";
+				return false;
+			} else if (!regMail.test(inputValue)) {
+				input.className = "input inputWrong";
+				reminder[3].innerHTML = "邮箱格式不正确";
+				return false;
+			} else {
+				input.className = "input inputRight";
+				reminder[3].innerHTML = "邮箱格式正确";
+				return true;
+			}	
+		}
+		function phoneVerify() {
+			var input = document.getElementById('phone'),
+			inputValue = input.value.trim();
+			if (inputValue.length == 0) {
+				input.className = "input inputWrong";
+				reminder[4].innerHTML = "手机号码不能为空";
+				return false;
+			} else if (!regPhone.test(inputValue)) {
+				input.className = "input inputWrong";
+				reminder[4].innerHTML = "手机号码格式不正确";
+				return false;
+			} else {
+				input.className = "input inputRight";
+				reminder[4].innerHTML = "手机号码格式正确";
+				return true;
+			}	
+		}
+		function getLength(str) {
+			var length = 0,
+			i,
+			strArr = str.split("");
+			for (i = 0; i < strArr.length; i++) {
+				charCode = strArr[i].charCodeAt(0);
+				if (charCode >=0 && charCode <= 128) {
+					length += 1;
+				} else {
+					length +=2;
+				}
+			}
+			return length;
+		}
+
+		button.addEventListener("click",function() {
+			var yesOrNo = nameVerify() && posswordVerify() && posswordAgianVerify() && mailVerify() && phoneVerify();
+			if (yesOrNo) {
+				alert("提交成功");
+			} else {
+				alert("提交失败");
+			}
+		}) ;
+		function init() {
+			if (document.addEventListener) {
+				content.addEventListener('focus', focusHandler, true);
+				content.addEventListener('blur', blurHandler, true);
+			} else {
+				content.onfocusin = focusHandler;
+				content.onfocusout = blurHandler;
+			}
+		}
+		function focusHandler(e){
+			var e = e || window.event;
+			var target = e.target ||e.srcElement;
+			switch (target.id) {
+				case "name":
+				reminder[0].innerHTML = "必填，长度为4~16个字符";
+				break;
+				case "possword":
+				reminder[1].innerHTML = "必填，密码长度为4~16个字母或数字,开头为字母";
+				break;
+				case "posswordAgain":
+				reminder[2].innerHTML = "必填，重复输入密码";
+				break;
+				case "mail":
+				reminder[3].innerHTML = "请输入邮箱";
+				break; 
+				case "phone":
+				reminder[4].innerHTML = "请输入手机号码";
+				break;   
+			}
+		}
+		function blurHandler(e){
+			var e = e || window.event;
+			var target = e.target ||e.srcElement;
+			switch (target.id) {
+				case "name":
+				nameVerify();
+				break;
+				case "possword":
+				posswordVerify();
+				break;
+				case "posswordAgain":
+				posswordAgianVerify();
+				break;
+				case "mail":
+				mailVerify();
+				break; 
+				case "phone":
+				phoneVerify();
+				break;   
+			}
+		}
+
+
+		init();
+	})();
+	</script>
+</body>
+</html>

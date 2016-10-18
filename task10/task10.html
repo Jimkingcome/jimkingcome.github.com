@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>flex练习</title>
+	<style type="text/css">
+	    * {
+	    	margin: 0;
+	    	padding: 0;
+	    }
+		.content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: 20px;
+			border: 1px solid #000;
+			overflow: hidden;
+		}
+        .item {
+        	margin: 20px;
+        	width: 150px;
+        	border: 1px solid red;
+        }
+        .item1 {
+        	height: 120px;
+        } 
+        .item2 {
+        	height: 100px;
+        } 
+        .item3 {
+        	height: 40px;
+        } 
+        .item4 {
+        	height: 200px;
+        	border-color: blue;
+        } 
+        @media(max-width: 640px) {
+        	.content {
+        		flex-wrap: wrap;
+        		align-items: flex-start;
+        	}
+        	.item4 {
+        		order: -1;
+        	}
+        }
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="item1 item"></div>
+	<div class="item2 item"></div>
+	<div class="item3 item"></div>
+	<div class="item4 item"></div>
+</div>
+</body>
+</html>

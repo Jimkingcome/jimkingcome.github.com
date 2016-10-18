@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>数据排序</title>
+	<style>
+	form {
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+	span {
+		display: block;
+		margin: 0px 3px;
+		padding: 10px;
+		background-color: red;
+		color: #fff;
+		float: left;
+	}
+	#arrText {
+		height: 400px;
+		
+	}
+	.data {
+		width: 100%;
+		background-color: red;
+		position: absolute;
+		display: block;
+		bottom:0px;
+		padding: 0px;
+		margin: 0px;
+	}
+	.box {
+		width: 10px;
+		position: relative;
+		float: left;
+		display: block;
+		height: 100%;
+		margin-left: 5px;
+	}
+	</style>
+	
+</head>
+
+<body>
+	<fieldset>
+		<legend>输入数据</legend>
+		<form>	
+			<input type="text" id="input">
+			<button id="unshift_">左侧入</button>
+			<button id="push_">右侧入</button>
+			<button id="shift_">左侧出</button>
+			<button id="pop_">右侧出</button>
+			<input type="button" id="sort" value="排序">
+		</form>
+	</fieldset>
+	
+	<div id="arrText">
+
+	</div>
+	
+	<script>
+	window.onload = function(){
+		var doc = document,
+		arrText = doc.getElementById('arrText'),
+		unshift_= doc.getElementById('unshift_'),
+		push_= doc.getElementById('push_'),
+		shift_= doc.getElementById('shift_'),
+		pop_= doc.getElementById('pop_'),
+        arrText = document.getElementById('arrText'),
+        spans = arrText.getElementsByTagName('span');
+		var sort_ = doc.getElementById('sort')
+		arr = randomData();
+		var states = [];
+        //事件绑定函数，兼容浏览器差异
+        function addEvent(element, event, listener) {
+        	if (element.addEventListener) {
+        		element.addEventListener(event, listener, false);
+        	}
+        	else if (element.attachEvent) {
+        		element.attachEvent("on" + event, listener);
+        	}
+        	else {
+        		element["on" + event] = listener;
+        	}
+        }
+        //正则匹配
+        function reg(str) {
+        	return /^(?:[1-9]\d|100)$/.test(str);
+        }
+
+
+        //产生随机数
+        function randomData() {
+        	var random_arr = [];
+        	for (var i = 0; i < 50; i++) {
+        		random_arr.push(Math.floor(Math.random()*90+10));
+        	}
+        	return random_arr;
+        }
+
+		//渲染数组
+		function renderArr(state) {
+			var state = state || arr;
+			arrText.innerHTML = "";
+			var str = "",
+			i,len;
+			for ( i = 0, len = state.length; i < len; i++) {
+				str += "<div class = 'box'>"
+				str += "<span class='data' style='height:"+state[i]*3+"px'>"+"</span>";
+				str += "</div>"
+			};
+			arrText.innerHTML = str;
+		}
+		
+		//排序
+		function sortArr(array) {
+			var i = 0,
+			len = array.length,
+			j,
+			d;
+			states.length = 0;
+			if (array.length < 1) {
+				return array;
+			}
+			for (; i < len; i++) {
+				for (j = 0; j < len-i; j++) {
+					if (array[j] > array[j + 1]) {
+						d = array[j + 1];
+						array[j + 1] = array[j];
+						array[j] = d;
+            			states.push(array.slice(0));//保存快照
+
+            			//JSON.parse(JSON.stringify(array))
+            		}
+            	}
+            }
+            return array;    
+        }
+        
+		//事件代理
+		
+		addEvent(arrText,"click",function(e) {
+			if (e.target && e.target.nodeName.toUpperCase() == "SPAN") {
+		    		//[].slice.call可以将NodeList转换成数组
+		    		var index = [].slice.call(spans,0).indexOf(e.target);
+		    		arr.splice(index,1);
+		    		renderArr();
+		    		//e.target.parentNode.removeChild(e.target);
+		    	}
+		    }); 
+
+		//添加事件
+		addEvent(unshift_,"click",function(event) {
+			var input = document.getElementById('input').value;
+			if (reg(input)) {
+				if(arr.length<60) {
+					arr.unshift(input);
+					renderArr();
+				} else {
+					alert("数据已超出");
+				}
+
+			} else {
+				alert("请输入10-100范围数字");
+			}
+			event.preventDefault();
+		}); 
+		addEvent(push_,"click",function(event) {
+			var input = document.getElementById('input').value;
+			if (reg(input)) {
+				if(arr.length<60) {
+					arr.push(input);
+					renderArr();
+				} else {
+					alert("数据已超出");
+				}
+				
+			} else{
+				alert("请输入10-100范围的数字");
+			}
+			event.preventDefault();
+		});
+		addEvent(shift_,"click",function(event) {
+			if (arr.length) {
+				var del = arr.shift();
+				renderArr();
+				alert(del);
+			} else{
+				alert("数组为空");
+			}
+			event.preventDefault();
+		}); 
+		addEvent(pop_, "click", function(event) {
+			if (arr.length) {
+				var del = arr.pop();
+				renderArr();
+				alert(del);
+			} else{
+				alert("数组为空");
+			}
+			event.preventDefault();
+		});
+		addEvent(sort_, "click", function(event) {
+			event.preventDefault();
+			if (arr.length == 0) {
+				return alert('队列为空');
+			}
+			arr.sortArr();
+			timer = setInterval(paint,10);//用时间周期将快照显示出来
+			function paint() {
+				var state = states.shift() || [];
+				if (state.length !== 0) {
+					renderArr(state);
+				} else {
+					clearInterval(timer);
+					return;
+				}
+			}
+		});
+		Array.prototype.sortArr = function() {
+			return sortArr(this);
+		}   
+
+		renderArr();
+	};
+	
+	</script>
+</body>
+</html>

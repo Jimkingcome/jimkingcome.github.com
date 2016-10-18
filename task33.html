@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>听指令的小方块（一）</title>
+    <style>
+    td {
+       width: 40px;
+       height: 40px;
+       border:2px solid #ccc;
+       text-align: center;
+       position: relative;
+
+   }
+   table {
+       margin: 0 auto;
+
+       border-collapse:collapse; 
+   }
+
+   tr:first-child>td, tr>td:first-child {
+    border:none;
+}
+.color {
+  background-color: red;
+}
+.top {
+    margin-left: -1px;
+    position: absolute;
+    top:0px;
+    width: 100%;
+    height: 10px;
+    background-color: blue;
+}
+.right { 
+    position: absolute;
+    top:0px;
+    right:0px;
+    width: 10px;
+    height: 100%;
+    background-color: blue;
+}
+.left { 
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 10px;
+    height: 100%;
+    background-color: blue;
+}
+.bottom {
+    margin-left: -1px;
+    position: absolute;
+    bottom:0px;
+    width: 100%;
+    height: 10px;
+    background-color: blue;
+}
+.inputarea {
+    margin: 20px auto;
+    width: 300px;
+}
+</style>
+</head>
+
+<body>
+    <table>
+        <tr>
+          <td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+          <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+      </tr>
+      <tr>
+          <td>1</td><td></td><td></td><td></div></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>2</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>3</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>4</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>5</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>6</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>7</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>8</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>9</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+          <td>10</td><td></td><td></td><td></td><td></td><td></td>
+          <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+  </table>
+  <div class="inputarea">
+    <input type="text">
+    <input type="button" value="执行">
+</div>
+<script>
+
+function Data(index1,index2) {
+    var focus = true,
+    direction = 0,
+    rowNumber = index1,
+    colNumber = index2;
+    return {
+        changeFocus: function() {
+            if (focus) {
+                focus = false;
+            } else {
+                focus = true;
+            }
+        },
+        getFocus: function() {
+            return focus;
+        },
+        getRowNumber: function() {
+            return rowNumber;
+        },
+        getColNumber: function() {
+            return colNumber;
+        },
+        getDirection: function() {
+            return direction;
+        },
+        changeDirection: function(order) {
+            switch (order) {
+                case "TUN LEF":
+                direction = direction += 90;
+                if (direction == 360) {
+                    direction = 0;
+                };
+                break;
+                case "TUN RIG":
+                direction = direction -= 90;
+                if (direction < 0) {
+                    direction = 270;
+                };
+                break;
+                case "TUN BAC":
+                direction = direction += 180;
+                if (direction == 360) {
+                    direction = 0;
+                };
+                if (direction == 450) {
+                    direction = 90;
+                }
+                break;
+            }
+            
+        },
+        changeLocation: function() {
+            switch (direction) {
+                case 0:
+                if (colNumber == 10) {
+                    return;
+                };
+                colNumber = colNumber += 1;
+                break;
+                case 90:
+                if (rowNumber == 1) {
+                    return;
+                };
+                rowNumber = rowNumber -= 1;
+                break;
+                case 180:
+                if (colNumber == 1) {
+                    return;
+                };
+                colNumber = colNumber -= 1;
+                break;
+                case 270:
+                if (rowNumber == 10) {
+                    return;
+                };
+                rowNumber = rowNumber += 1;
+                break;
+            }
+        }
+    }
+}
+
+var arr = document.getElementsByTagName('tr');
+arr = [].slice.call(arr,0)
+for (var i = 0; i < arr.length; i++) {
+ arr[i] = arr[i].getElementsByTagName('td');
+}; 
+
+
+var diamond = Data(4,6);
+if (diamond.getFocus()) {
+    render(diamond.getRowNumber(),diamond.getColNumber(),diamond.getDirection(),true);
+}
+
+function render(index1,index2,direction,nowOrForm) {
+    if (nowOrForm) {
+        var dom = arr[index1][index2];
+        dom.setAttribute("class","color");
+        switch(direction) {
+            case 0:
+                dom.innerHTML = "<div class = 'right'></div>";
+                break;
+           case 90:
+                dom.innerHTML = '<div class = "top"></div>';
+                break;
+             case 180:
+                dom.innerHTML = '<div class = "left"></div>';
+                break;
+            case 270:
+                dom.innerHTML = '<div class = "bottom"></div>';
+                break;
+        }
+    } else {
+        var dom = arr[index1][index2];
+        dom.className = "";
+        dom.innerHTML = "";
+    }
+    
+}
+function goSomeDirection() {
+    oldRowNumber=diamond.getRowNumber();
+    oldColNumber=diamond.getColNumber();
+    render(oldRowNumber,oldColNumber,0,false)
+    diamond.changeLocation();
+    render(diamond.getRowNumber(),diamond.getColNumber(),diamond.getDirection(),true);
+}
+function renderChangeDirection(order) {
+    diamond.changeDirection(order);
+    render(diamond.getRowNumber(),diamond.getColNumber(),diamond.getDirection(),true);
+}
+
+function command(order){
+    if (order=="GO") {
+        goSomeDirection();
+    } else {
+        renderChangeDirection(order);
+    }
+}
+var bottom = document.getElementsByTagName('input')[1]
+bottom.onclick = function() {
+    var input = document.getElementsByTagName('input')[0].value.trim();
+    command(input);
+}
+
+</script>
+</body>
+</html>

@@ -6,7 +6,6 @@ body {
 }
 header {
 	background-color: #2B2B2B; 
-	
 	overflow: hidden;	
 }
 header  img {
@@ -100,7 +99,7 @@ aside h3 {
 }
 .input input, .select input, .select label,textarea {
 	
-	display: inline-block;
+	display: inline;
 	font-size: 14px;
 
 }
@@ -124,6 +123,7 @@ input[type="submit"] {
 	border-radius: 7px;
 	height:40px;
 	color: white;
+	border:none;
 }
 footer {
 	width:100%;

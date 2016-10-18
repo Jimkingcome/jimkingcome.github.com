@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>表单（三）联动</title>
+	<style>
+	
+	
+	.hidden {
+		display: none;
+	}
+	</style>
+
+</head>
+
+<body>
+	<div id="content">
+
+		<input type="radio" name="student_radio" value ="1"  checked="checked" id="student"><span>在校生</span>
+		<input type="radio" name="student_radio" value ="2" id="notstudent"><span>非在校生</span>
+		<div>
+			<div class="student">
+				<span>学校</span>
+				<select id="city">
+					<option value="1">北京</option>
+					<option value="2">上海</option>
+					<option value="3">广州</option>
+				</select>
+				<select id="school">
+					<option value="1">北京大学</option>
+					<option value="2">清华大学</option>
+					<option value="3">中国人民大学</option>
+				</select>
+			</div>
+			<div class="hidden notstudent">
+				<span>就业单位</span>
+				<input type="text" id="input">
+			</div>
+		</div>
+	</div>
+	<script>
+	(function () {
+		var student_radio = document.getElementById('student');
+		var notstudent_radio = document.getElementById('notstudent');
+		var student = document.getElementsByClassName('student')[0];
+		var notstudent = document.getElementsByClassName('notstudent')[0];
+		var source = document.getElementById("city");
+
+		function change() {
+			if (notstudent_radio.checked) {
+                notstudent.className = "notstudent";
+                student.className = "student hidden";
+            
+		    } else {
+                notstudent.className = "notstudent hidden";
+                student.className = "student";
+		    }
+		}
+
+        function selectDistrict() {
+            var data = {
+                1: ["北京大学", "清华大学", "北京航空航天大学"],
+                2: ["复旦大学", "上海交通大学", "同济大学"],
+                3: ["浙江大学", "杭州电子科技大学", "浙江工业大学"]
+            }
+            
+            var target = document.getElementById("school");
+            var selected = source.options[source.selectedIndex].value;
+            target.innerHTML = "";
+            for (var i = 0; i < data[selected].length; i++) {
+                var opt = document.createElement('option');
+                opt.value = data[selected][i];
+                opt.innerHTML = data[selected][i];
+                document.getElementById('school').appendChild(opt);
+            }
+        }
+
+        student_radio.onclick = change;
+		notstudent_radio.onclick = change;
+        source.onchange= selectDistrict;
+	})();
+
+
+
+	</script>
+</body>
+</html>

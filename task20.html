@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>数据查询</title>
+	<style>
+	form {
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+	#arrText span {
+		color: yellow;
+		
+	}
+	#arrText div {
+        margin: 0px 3px;
+		padding: 10px;
+		background-color: red;
+		color: #fff;
+		float: left;
+	}
+	</style>
+	<script>
+	window.onload = function(){
+    //事件绑定函数，兼容浏览器差异
+    function addEvent(element, event, listener) {
+    	if (element.addEventListener) {
+    		element.addEventListener(event, listener, false);
+    	}
+    	else if (element.attachEvent) {
+    		element.attachEvent("on" + event, listener);
+    	}
+    	else {
+    		element["on" + event] = listener;
+    	}
+    }
+
+    
+    var doc = document,
+    arrText = doc.getElementById('arrText'),
+    unshift_= doc.getElementById('unshift_'),
+    push_= doc.getElementById('push_'),
+    shift_= doc.getElementById('shift_'),
+    pop_= doc.getElementById('pop_'),
+    search_ = doc.getElementById('search'),
+    arrData = [];
+	//渲染数组
+	function renderArr(str) {
+		arrText.innerHTML = arrData.map(function(item) {
+			//有参数str时为查询功能，使用replace加上span标签
+			if (str != undefined && str.length > 0) {
+				item = item.replace(new RegExp(str,"g"),"<span class = 'select'>" + str + "</span>");
+			}
+			return '<div>' + item + '</div>';
+		}).join('');
+	}
+
+	//事件代理
+	var arrText = document.getElementById('arrText'),
+	spans = arrText.getElementsByTagName('div');
+	addEvent(arrText,"click",function(e) {
+		if (e.target && e.target.nodeName.toUpperCase() == "DIV") {
+		    		//[].slice.call可以将NodeList转换成数组
+		    		var index = [].slice.call(spans,0).indexOf(e.target);
+		    		arrData.splice(index,1);
+		    		renderArr();
+		 }
+		 event.preventDefault();
+	}); 
+
+	//添加事件
+	addEvent(push_,"click",function(event) {
+		var input = document.getElementById('input').value.trim();
+		var arrWord = input.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(item) {
+			if (item.length) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		arrData = arrData.concat(arrWord);
+		renderArr();
+		event.preventDefault();
+	}); 
+	addEvent(unshift_,"click",function(event) {
+		var input = document.getElementById('input').value.trim();
+		var arrWord = input.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/).filter(function(item) {
+			if (item.length) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+		
+		Array.prototype.unshift.apply(arrData,arrWord);//使用apply方法传入数组数据
+		renderArr();
+		event.preventDefault();
+	});
+	addEvent(shift_,"click",function(event) {
+		if (arrData.length) {
+			var del = arrData.shift();
+			renderArr();
+			alert(del);
+		} else{
+			alert("数组为空");
+		}
+		event.preventDefault();
+	}); 
+	addEvent(pop_, "click", function(event) {
+		if (arrData.length) {
+			var del = arrData.pop();
+			renderArr();
+			alert(del);
+		} else{
+			alert("数组为空");
+		}
+		event.preventDefault();
+	});
+	addEvent(search_,"click",function(event) {
+		var searchInput = document.getElementById('searchInput').value.trim();
+		renderArr(searchInput);
+		event.preventDefault();
+	});
+};
+</script>
+</head>
+
+<body>
+	<form>	
+		<textarea rows="5" cols="20" placeholder="请输入字符" id="input"></textarea>
+		<button id="unshift_">左侧入</button>
+		<button id="push_">右侧入</button>
+		<button id="shift_">左侧出</button>
+		<button id="pop_">右侧出</button>
+		<button id="search">查询</button>
+		<input type="text" id="searchInput">
+	</form>
+	<div id="arrText">
+
+	</div>
+</body>
+</html>
