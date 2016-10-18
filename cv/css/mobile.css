@@ -100,7 +100,17 @@ p{
 	overflow: hidden;
 	box-shadow: 4px 4px 4px #555;
 }
-
+.section2 img {
+	width: 260px;
+}
+.images {
+	height:300px;
+}
+.more {
+	line-height: 30px;
+	font-size: 24px;
+	margin-top: 20px;
+}
 
 /*第三屏样式*/
 .section3 h1{

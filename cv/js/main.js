@@ -18,16 +18,12 @@ $(function(){
   }
   //插件配置
   var isPc=browserRedirect();
-  var en = ['Home', 'Projects', 'Professions', 'Experiences',
-                  'Hobbies', 'Contact'];
-  var cn = ['首页', '项目', '技能', '工作', '爱好', '联系'];
-  var pcBgColor = ['#7080b9', '#1bbc9b', '#7080b9', '#1bbc9b','#7080b9','#1bbc9b'];
-  var mBgColor = ['#7080b9','#7080b9','#7080b9','#7080b9','#7080b9','#7080b9',];
-  var isEn = window.location.href.indexOf('en.html') >= 0;
+  var pcBgColor = ['#7080b9', '#1bbc9b', '#7080b9', '#1bbc9b','#1bbc9b'];
+  var mBgColor = ['#7080b9','#7080b9','#7080b9','#7080b9','#7080b9',];
+  
   $('#pagePilling').fullpage({
       sectionsColor: isPc?pcBgColor:mBgColor,
       navigation: true,
-      navigationTooltips: isEn?en:cn,
       resize: true,
       continuousVertical: true,
 
@@ -52,7 +48,7 @@ $(function(){
 
   //section1项目图片向上滚动
   $('.item li').eq(1).hover(function() {
-    $(this).find('img').animate({top:'-720px'}, 3000);
+    $(this).find('img').animate({top:'-550px'}, 3000);
   }, function() {
     $(this).find('img').stop().css('top',0);
   });
