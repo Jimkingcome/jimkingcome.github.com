@@ -161,6 +161,17 @@ p{
 .section2.active .item li:nth-child(3){
 	transform: rotateY(0deg);
 }
+.section2 img {
+	width: 260px;
+}
+.images {
+	height:300px;
+}
+.more {
+	line-height: 30px;
+	font-size: 18px;
+	margin-top: 20px;
+}
 
 /*第三屏样式*/
 .section3 h1{
