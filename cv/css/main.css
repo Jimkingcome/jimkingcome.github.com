@@ -130,7 +130,7 @@ p{
 	height:300px;
 }
 .section2 .item li{
-	width:260px;
+	width:220px;
 	height:300px;
 	float: left;
 	margin:0 20px;
@@ -162,7 +162,7 @@ p{
 	transform: rotateY(0deg);
 }
 .section2 img {
-	width: 260px;
+	width: 220px;
 }
 .images {
 	height:300px;
@@ -170,7 +170,10 @@ p{
 .more {
 	line-height: 30px;
 	font-size: 24px;
-	margin-top: 20px;
+	margin-top: 40px;
+}
+.more a {
+	color: #9f3;
 }
 
 /*第三屏样式*/
@@ -320,13 +323,11 @@ p{
 .section6 a:hover::after{
 	transform: scaleX(1);
 } 
-.section6 span{
-	transition: 2s;
-	position: relative;
-	opacity: 0;
-	top:-200px;
-}
-.section6.active span{
+
+.section6 .active span{
 	opacity: 1;
 	top:0px;
+}
+.section6 h2 a{
+	color: #9f3; 
 }

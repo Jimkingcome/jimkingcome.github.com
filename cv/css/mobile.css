@@ -94,14 +94,14 @@ p{
 	width:100%;
 }
 .section2 .item li{
-	width:260px;
+	width:220px;
 	height:300px;
 	margin: 0 auto 10px;
 	overflow: hidden;
 	box-shadow: 4px 4px 4px #555;
 }
 .section2 img {
-	width: 260px;
+	width: 220px;
 }
 .images {
 	height:300px;
@@ -109,10 +109,15 @@ p{
 .more {
 	line-height: 30px;
 	font-size: 24px;
-	margin-top: 20px;
+	margin-top: 30px;
+}
+.more a {
+	color: #9f3;
 }
 
+
 /*第三屏样式*/
+
 .section3 h1{
 	margin-bottom: 10px;
 }
@@ -130,8 +135,9 @@ p{
 /*第四屏样式*/
 .section4 .work{
 	line-height: 2rem;
-	width: 100%;
+	width: 80%;
 	margin: 0 auto;
+	padding: 0 20px;
 }
 
 .section4 .work h1{
@@ -153,4 +159,7 @@ p{
 }
 .section6 a:nth-child(3){
 	font-size: 1.8rem;
+}
+.section6 h2 a{
+	color: #9f3; 
 }

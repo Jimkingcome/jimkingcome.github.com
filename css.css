@@ -1585,8 +1585,7 @@ main{margin-bottom:100px}
 .task-list .task-content{display:block;padding:5px;background:#fff;-webkit-box-shadow:0 0 2px #949494;box-shadow:0 0 2px #949494}
 .task-list .task-info{padding:5px 5px 0}
 .task-list .task-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%;margin:0 0 5px 0;color:#333;font-size:14px;font-weight:600}
-.task-list .task-detail{color:rgba(0,0,0,.54);font-size:12px;height:100px;overflow: hidden;}
-.add-height .task-detail:hover{height:350px;transition: all 1s;}
+.task-list .task-detail{color:rgba(0,0,0,.54);font-size:12px;height:40px;overflow: hidden;}
 .task-list .task-detail em{margin-right:2px;color:#f0ad4e}
 @media (min-width:768px){.task-list .task{width:50%}
 }
